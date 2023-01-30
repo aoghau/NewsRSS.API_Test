@@ -11,6 +11,12 @@ namespace NewsRSS.API.Data
         public int Id {get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
+        public RSSFeed(string name, string url, bool isActive)
+        {            
+            Name = name;
+            Url = url;
+            IsActive = isActive;
+        }
     }
 }
