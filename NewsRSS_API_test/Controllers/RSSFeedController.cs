@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NewsRSS_API_test.Controllers
 {
+    [BasicAuth]
     [Route("api/feeds")]
     [ApiController]
     public class RSSFeedController : Controller

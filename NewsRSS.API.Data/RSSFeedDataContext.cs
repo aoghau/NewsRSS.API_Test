@@ -29,10 +29,12 @@ namespace NewsRSS.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseSerialColumns();            
+            modelBuilder.UseSerialColumns();
+            modelBuilder.Entity<User>().HasIndex(x => x.Name).IsUnique();
         }
 
         public DbSet<RSSFeed> RSSFeeds { get; set;} 
         public DbSet<NewsItem> News { get; set;}
+        public DbSet<User> Users { get; set;}
     }
 }

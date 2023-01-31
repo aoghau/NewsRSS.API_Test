@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewsRSS.API.Data;
 using System.ServiceModel.Syndication;
 using System.Xml;
 
 namespace NewsRSS_API_test.Controllers
-{
+{ 
+    
     [Route("api/news")]
     [ApiController]
     public class NewsController : Controller
@@ -31,13 +33,14 @@ namespace NewsRSS_API_test.Controllers
             return StatusCode(200);
         }
 
+        [BasicAuth]
         [HttpGet("{date}")]
         public IActionResult GetUnreadNewsFromDate(DateTimeOffset date)
         {
             List<NewsItem> news = new List<NewsItem>();
             using (var context = new RSSFeedDataContext())
-            {
-                news.AddRange(context.News.Where(x => x.DatePosted == date.UtcDateTime && !x.IsRead));
+            {                
+                news.AddRange(context.News.Where(x => DateTime.Compare(x.DatePosted.Date, date.UtcDateTime.Date.AddDays(1)) == 0 && !x.IsRead));
             }
             return new JsonResult(news);
         }
