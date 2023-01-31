@@ -3,10 +3,11 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using NewsRSS.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NewsRSS_API_test.Controllers
 {
-    [BasicAuth]
+    [Authorize]
     [Route("api/feeds")]
     [ApiController]
     public class RSSFeedController : Controller

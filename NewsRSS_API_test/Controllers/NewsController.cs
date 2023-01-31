@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace NewsRSS_API_test.Controllers
 { 
-    
+    [Authorize]
     [Route("api/news")]
     [ApiController]
     public class NewsController : Controller
@@ -32,8 +32,7 @@ namespace NewsRSS_API_test.Controllers
             }
             return StatusCode(200);
         }
-
-        [BasicAuth]
+        
         [HttpGet("{date}")]
         public IActionResult GetUnreadNewsFromDate(DateTimeOffset date)
         {
