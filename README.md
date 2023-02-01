@@ -7,6 +7,7 @@ Authorization system uses JWT bearer token. This means that with every request t
 Endpoints
 1. Register(string name, string password) - adds a user into the database with given credentials
 2. Login(string name, string password) - generates a JWT token and returns it to you if the credentials are valid. The JWT token is needed to access further endpoints
+
 [Authorization required further]
 3. Add Feed(string url) - adds an RSS feed with given url, it must be valid
 4. Get active feeds - returns active feeds
