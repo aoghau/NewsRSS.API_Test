@@ -12,6 +12,10 @@ namespace NewsRSS_API_test.Controllers
     [ApiController]
     public class RSSFeedController : Controller
     {
+        /// <summary>
+        /// Method gets all active RSS feeds
+        /// </summary>
+        /// <returns>A JSON with all active feeds, or an empty one if there are none</returns>
         [HttpGet]
         public IActionResult GetActiveFeeds()
         {
@@ -24,6 +28,11 @@ namespace NewsRSS_API_test.Controllers
             return new JsonResult(feeds);
         }
 
+        /// <summary>
+        /// Gets info abouth an RSS feed using given url, and adds the given feed into DB
+        /// </summary>
+        /// <param name="url">a URL</param>
+        /// <returns>Bad request if there is no resource with that url, and "name added" if the resource exists</returns>
         [HttpPost("{url}")]
         public IActionResult AddRSSFeed(string url)
         {

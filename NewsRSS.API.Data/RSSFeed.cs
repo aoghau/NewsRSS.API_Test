@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NewsRSS.API.Data
 {
+    //represents an RSS Feed
     public class RSSFeed
     {
         public int Id {get; set; }

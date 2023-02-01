@@ -11,11 +11,21 @@ namespace NewsRSS_API_test.Controllers
     {
         private IConfiguration _config;
 
+        /// <summary>
+        /// Constructor for the controller, sets appsettings.json as config
+        /// </summary>
+        /// <param name="config">Current configuration</param>
         public UserController(IConfiguration config)
         {
             _config = config;
         }
         
+        /// <summary>
+        /// Adds a user into the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <returns>Bad request if name or password are invalid, OK if otherwise</returns>
         [AllowAnonymous]
         [HttpPost("{name}, {password}")]
         public IActionResult Register(string name, string password)
@@ -32,6 +42,12 @@ namespace NewsRSS_API_test.Controllers
             return StatusCode(200);
         }
 
+        /// <summary>
+        /// Cheks if a user is in DB, then returns a JWT token that can be used to authorize
+        /// </summary>
+        /// <param name="name">Username, case sensitive</param>
+        /// <param name="password">User password</param>
+        /// <returns>Not found if there's no such user, Ok with the token if otherwise</returns>
         [AllowAnonymous]
         [HttpPost("Login")]
         public IActionResult Login(string name, string password) 
@@ -46,6 +62,12 @@ namespace NewsRSS_API_test.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Generates a JWT token that is used to authorize into the API. The token is valid for 15 minutes
+        /// </summary>
+        /// <param name="name">Username, case sensitive</param>
+        /// <param name="password">User password</param>
+        /// <returns>A JWT token string</returns>
         private string Generate(string name, string password) 
         {
             var securityKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -65,6 +87,12 @@ namespace NewsRSS_API_test.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        /// <summary>
+        /// Checks if given pair of name and password exist in the DB
+        /// </summary>
+        /// <param name="username">Username, case sensitive</param>
+        /// <param name="password">User password</param>
+        /// <returns>True, if such user exists and the password is correct, false if otherwise</returns>
         private bool IsAuthorizedUser(string username, string password)
         {
             using (var context = new RSSFeedDataContext())

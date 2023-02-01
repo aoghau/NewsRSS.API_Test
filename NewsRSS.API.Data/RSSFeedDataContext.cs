@@ -19,6 +19,7 @@ namespace NewsRSS.API.Data
             
         }
 
+        //options builder sets npgsql as the DB provied
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if(!optionsBuilder.IsConfigured)
@@ -27,6 +28,7 @@ namespace NewsRSS.API.Data
             }
         }
 
+        //sets user entity's Name field as UNIQUE
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.UseSerialColumns();

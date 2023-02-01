@@ -11,7 +11,11 @@ namespace NewsRSS_API_test.Controllers
     [ApiController]
     public class NewsController : Controller
     {
-        [HttpGet]
+        /// <summary>
+        /// Method that fetches news from all RSS feeds and adds them into the database
+        /// </summary>
+        /// <returns>Returns Ok</returns>
+        [HttpGet("AddNews")]
         public IActionResult AddNews()
         {
             List<NewsItem> news = new List<NewsItem>();
@@ -33,6 +37,11 @@ namespace NewsRSS_API_test.Controllers
             return StatusCode(200);
         }
         
+        /// <summary>
+        /// The method checks the database for unread news from the date passed into and passes them into response
+        /// </summary>
+        /// <param name="date">Only supports DD Mon YYYY</param>
+        /// <returns>A JSON with unread news from the date, or an empty JSON if there are none that satisfy the criteria</returns>
         [HttpGet("{date}")]
         public IActionResult GetUnreadNewsFromDate(DateTimeOffset date)
         {
@@ -44,6 +53,10 @@ namespace NewsRSS_API_test.Controllers
             return new JsonResult(news);
         }
 
+        /// <summary>
+        /// Sets all unread news in DB as read
+        /// </summary>
+        /// <returns>Returns OK</returns>
         [HttpPost]
         public IActionResult SetNewsAsRead()
         {

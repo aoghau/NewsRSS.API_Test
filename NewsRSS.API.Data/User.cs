@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NewsRSS.API.Data
 {
+    //represents a user
     public class User
     {
         public int Id { get; set; }
