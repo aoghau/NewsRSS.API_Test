@@ -2,7 +2,7 @@
 A Web API application that allows user to add RSS feeds and check news from them
 
 The database was implemented using PostgreSQL.
-Authorization system uses JWT bearer token. This means that with every request to restricted endpoints, you need to pass the JWT token in the request header. Swagger canot do that, Postman, however, can.
+Authorization system uses JWT bearer token. This means that with every request to restricted endpoints, you need to pass the JWT token in the request header. Swagger cannot do that, Postman, however, can.
 
 Endpoints
 1. Register(string name, string password) - adds a user into the database with given credentials
